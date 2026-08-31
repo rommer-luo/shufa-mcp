@@ -1,0 +1,26 @@
+{
+  "name": "calligraphy-mcp",
+  "version": "1.0.0",
+  "description": "书法知识问答、指导与教学 MCP 服务",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "calligraphy-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "keywords": ["mcp", "calligraphy", "书法", "知识库"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "typescript": "^5.8.3"
+  }
+}
