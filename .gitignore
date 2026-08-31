@@ -19,3 +19,5 @@ npm-debug.log*
 # Environment
 .env
 .env.local
+
+RELEASE-GUIDE.md
