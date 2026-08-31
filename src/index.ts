@@ -8,6 +8,10 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KNOWLEDGE_DIR = join(__dirname, "..", "knowledge");
 
+// 通过环境变量设置默认 level，可在 MCP 配置的 env 中传入
+// 可选值：beginner / intermediate / advanced
+const DEFAULT_LEVEL = (process.env.CALLIGRAPHY_DEFAULT_LEVEL || "beginner") as "beginner" | "intermediate" | "advanced";
+
 // Load all knowledge files
 function loadKnowledge(): Map<string, string> {
   const knowledge = new Map<string, string>();
@@ -41,7 +45,7 @@ server.tool(
     question: z.string().describe("用户关于书法的问题"),
     level: z
       .enum(["beginner", "intermediate", "advanced"])
-      .default("beginner")
+      .default(DEFAULT_LEVEL)
       .describe("用户书法水平等级：beginner=初学者, intermediate=进阶者, advanced=高级者"),
   },
   async ({ question, level }) => {
@@ -93,7 +97,7 @@ server.tool(
   {
     current_level: z
       .enum(["beginner", "intermediate", "advanced"])
-      .default("beginner")
+      .default(DEFAULT_LEVEL)
       .describe("用户当前书法水平"),
     goal: z
       .string()
@@ -218,7 +222,7 @@ server.tool(
       .describe("技法类型：all=全部, grip=执笔方法, brushwork=运笔技法, strokes=基本笔画, styles=书体特点"),
     level: z
       .enum(["beginner", "intermediate", "advanced"])
-      .default("beginner")
+      .default(DEFAULT_LEVEL)
       .describe("用户书法水平"),
   },
   async ({ technique_type, level }) => {
@@ -280,7 +284,7 @@ server.tool(
       .describe("探讨的主题，如：书法美学概论、点画之美、章法之美、书法与人生等"),
     level: z
       .enum(["beginner", "intermediate", "advanced"])
-      .default("beginner")
+      .default(DEFAULT_LEVEL)
       .describe("用户书法水平"),
   },
   async ({ topic, level }) => {

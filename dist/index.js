@@ -6,6 +6,9 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KNOWLEDGE_DIR = join(__dirname, "..", "knowledge");
+// 通过环境变量设置默认 level，可在 MCP 配置的 env 中传入
+// 可选值：beginner / intermediate / advanced
+const DEFAULT_LEVEL = (process.env.CALLIGRAPHY_DEFAULT_LEVEL || "beginner");
 // Load all knowledge files
 function loadKnowledge() {
     const knowledge = new Map();
@@ -33,7 +36,7 @@ server.tool("query_calligraphy", "查询书法知识，回答书法相关问题�
     question: z.string().describe("用户关于书法的问题"),
     level: z
         .enum(["beginner", "intermediate", "advanced"])
-        .default("beginner")
+        .default(DEFAULT_LEVEL)
         .describe("用户书法水平等级：beginner=初学者, intermediate=进阶者, advanced=高级者"),
 }, async ({ question, level }) => {
     const knowledge = loadKnowledge();
@@ -75,7 +78,7 @@ ${relevantContent || "暂未找到完全匹配的知识内容，以下为通用�
 server.tool("get_learning_plan", "为用户制定个性化的书法学习计划。根据用户当前水平和目标，提供阶段性的学习建议。", {
     current_level: z
         .enum(["beginner", "intermediate", "advanced"])
-        .default("beginner")
+        .default(DEFAULT_LEVEL)
         .describe("用户当前书法水平"),
     goal: z
         .string()
@@ -183,7 +186,7 @@ server.tool("get_technique_guide", "获取书法技法指导，包括执笔、�
         .describe("技法类型：all=全部, grip=执笔方法, brushwork=运笔技法, strokes=基本笔画, styles=书体特点"),
     level: z
         .enum(["beginner", "intermediate", "advanced"])
-        .default("beginner")
+        .default(DEFAULT_LEVEL)
         .describe("用户书法水平"),
 }, async ({ technique_type, level }) => {
     const knowledge = loadKnowledge();
@@ -235,7 +238,7 @@ server.tool("get_aesthetic_insight", "探讨书法美学与哲学，包括审美
         .describe("探讨的主题，如：书法美学概论、点画之美、章法之美、书法与人生等"),
     level: z
         .enum(["beginner", "intermediate", "advanced"])
-        .default("beginner")
+        .default(DEFAULT_LEVEL)
         .describe("用户书法水平"),
 }, async ({ topic, level }) => {
     const knowledge = loadKnowledge();
