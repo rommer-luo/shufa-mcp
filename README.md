@@ -48,7 +48,9 @@ npm run build
     "calligraphy": {
       "command": "node",
       "args": ["/path/to/calligraphy-mcp/dist/index.js"],
-      "env": {}
+      "env": {
+        "CALLIGRAPHY_DEFAULT_LEVEL": "intermediate"
+      }
     }
   }
 }
@@ -62,7 +64,9 @@ npm run build
     "calligraphy": {
       "command": "calligraphy-mcp",
       "args": [],
-      "env": {}
+      "env": {
+        "CALLIGRAPHY_DEFAULT_LEVEL": "intermediate"
+      }
     }
   }
 }
@@ -77,7 +81,9 @@ npm run build
   "calligraphy": {
     "command": "node",
     "args": ["d:\\phpstudy_81\\WWW\\self\\shufa-mcp\\dist\\index.js"],
-    "env": {}
+    "env": {
+        "CALLIGRAPHY_DEFAULT_LEVEL": "intermediate"
+    }
   }
 }
 ```
